@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<konyvtar>
+
+    <!-- KIADÓK -->
+    <kiadok>
+        <kiado kiado_id="K1">
+            <nev>Móra Kiadó</nev>
+            <szekhely>Budapest</szekhely>
+            <alapitasi_ev>1950</alapitasi_ev>
+        </kiado>
+
+        <kiado kiado_id="K2">
+            <nev>Animus Kiadó</nev>
+            <szekhely>Debrecen</szekhely>
+            <alapitasi_ev>1992</alapitasi_ev>
+        </kiado>
+    </kiadok>
+
+    <!-- SZERZŐK -->
+    <szerzok>
+        <szerzo szerzo_id="SZ1">
+            <nev>Mikszáth Kálmán</nev>
+            <szuletesi_ev>1847</szuletesi_ev>
+            <nemzetiseg>magyar</nemzetiseg>
+        </szerzo>
+
+        <szerzo szerzo_id="SZ2">
+            <nev>Jókai Mór</nev>
+            <szuletesi_ev>1825</szuletesi_ev>
+            <nemzetiseg>magyar</nemzetiseg>
+        </szerzo>
+    </szerzok>
+
+    <!-- KATEGÓRIÁK -->
+    <kategoriak>
+        <kategoria kategoria_id="KAT1">
+            <nev>Klasszikus irodalom</nev>
+            <leiras>Magyar klasszikus regények és elbeszélések</leiras>
+        </kategoria>
+
+        <kategoria kategoria_id="KAT2">
+            <nev>Történelmi regény</nev>
+            <leiras>Történelmi témájú irodalmi művek</leiras>
+        </kategoria>
+    </kategoriak>
+
+    <!-- KÖNYVEK -->
+    <konyvek>
+        <konyv konyv_id="KV1" kiado_id="K1">
+            <cim>A fekete város</cim>
+            <ISBN>978-963-11-8765-4</ISBN>
+            <kiadasi_ev>2010</kiadasi_ev>
+            <oldalszam>320</oldalszam>
+        </konyv>
+
+        <konyv konyv_id="KV2" kiado_id="K1">
+            <cim>Szent Péter esernyője</cim>
+            <ISBN>978-963-11-8766-1</ISBN>
+            <kiadasi_ev>2012</kiadasi_ev>
+            <oldalszam>280</oldalszam>
+        </konyv>
+    </konyvek>
+
+    <!-- OLVASÓK -->
+    <olvasok>
+        <olvaso olvaso_id="O1">
+            <nev>Nagy Péter</nev>
+            <email>nagy.peter@email.hu</email>
+            <cim>
+                <iranyitoszam>4032</iranyitoszam>
+                <varos>Debrecen</varos>
+                <utca>Kossuth utca</utca>
+                <hazszam>15</hazszam>
+            </cim>
+        </olvaso>
+
+        <olvaso olvaso_id="O2">
+            <nev>Kovács Anna</nev>
+            <email>kovacs.anna@email.hu</email>
+            <cim>
+                <iranyitoszam>4025</iranyitoszam>
+                <varos>Debrecen</varos>
+                <utca>Petőfi tér</utca>
+                <hazszam>8</hazszam>
+            </cim>
+        </olvaso>
+    </olvasok>
+
+    <!-- OLVASÓ TELEFONOK -->
+    <olvaso_telefonok>
+        <olvaso_telefon telefon_id="T1" olvaso_id="O1">
+            <telefonszam>+36 30 123 4567</telefonszam>
+        </olvaso_telefon>
+
+        <olvaso_telefon telefon_id="T2" olvaso_id="O1">
+            <telefonszam>+36 20 987 6543</telefonszam>
+        </olvaso_telefon>
+
+        <olvaso_telefon telefon_id="T3" olvaso_id="O2">
+            <telefonszam>+36 70 555 1234</telefonszam>
+        </olvaso_telefon>
+    </olvaso_telefonok>
+
+    <!-- KÖNYV-SZERZŐ kapcsolatok -->
+    <konyv_szerzok>
+        <konyv_szerzo konyv_id="KV1" szerzo_id="SZ1">
+            <szerep>főszerző</szerep>
+        </konyv_szerzo>
+
+        <konyv_szerzo konyv_id="KV2" szerzo_id="SZ1">
+            <szerep>főszerző</szerep>
+        </konyv_szerzo>
+    </konyv_szerzok>
+
+    <!-- KÖNYV-KATEGÓRIA kapcsolatok -->
+    <konyv_kategoriak>
+        <konyv_kategoria konyv_id="KV1" kategoria_id="KAT1"/>
+        <konyv_kategoria konyv_id="KV2" kategoria_id="KAT1"/>
+        <konyv_kategoria konyv_id="KV1" kategoria_id="KAT2"/>
+    </konyv_kategoriak>
+
+    <!-- KÖLCSÖNZÉSEK -->
+    <kolcsonzesek>
+        <kolcsonzes kolcsonzes_id="KOLCS1" olvaso_id="O1" konyv_id="KV1">
+            <kolcsonzes_datuma>2024-11-15</kolcsonzes_datuma>
+            <visszahozasi_hatarido>2024-12-15</visszahozasi_hatarido>
+            <statusz>folyamatban</statusz>
+        </kolcsonzes>
+
+        <kolcsonzes kolcsonzes_id="KOLCS2" olvaso_id="O2" konyv_id="KV2">
+            <kolcsonzes_datuma>2024-11-20</kolcsonzes_datuma>
+            <visszahozasi_hatarido>2024-12-20</visszahozasi_hatarido>
+            <statusz>visszahozva</statusz>
+        </kolcsonzes>
+    </kolcsonzesek>
+
+</konyvtar>

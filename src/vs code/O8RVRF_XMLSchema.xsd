@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Gyökér elem: konyvtar -->
+    <xs:element name="konyvtar">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="kiadok" type="KiadokTipus"/>
+                <xs:element name="szerzok" type="SzerzokTipus"/>
+                <xs:element name="kategoriak" type="KategoriakTipus"/>
+                <xs:element name="konyvek" type="KonyvekTipus"/>
+                <xs:element name="olvasok" type="OlvasokTipus"/>
+                <xs:element name="olvaso_telefonok" type="OlvasoTelefonokTipus"/>
+                <xs:element name="konyv_szerzok" type="KonyvSzerzokTipus"/>
+                <xs:element name="konyv_kategoriak" type="KonyvKategoriakTipus"/>
+                <xs:element name="kolcsonzesek" type="KolcsonzesekTipus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- KIADÓK típusok -->
+    <xs:complexType name="KiadokTipus">
+        <xs:sequence>
+            <xs:element name="kiado" type="KiadoTipus" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KiadoTipus">
+        <xs:sequence>
+            <xs:element name="nev" type="xs:string"/>
+            <xs:element name="szekhely" type="xs:string"/>
+            <xs:element name="alapitasi_ev" type="xs:int"/>
+        </xs:sequence>
+        <xs:attribute name="kiado_id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- SZERZŐK típusok -->
+    <xs:complexType name="SzerzokTipus">
+        <xs:sequence>
+            <xs:element name="szerzo" type="SzerzoTipus" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SzerzoTipus">
+        <xs:sequence>
+            <xs:element name="nev" type="xs:string"/>
+            <xs:element name="szuletesi_ev" type="xs:int"/>
+            <xs:element name="nemzetiseg" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="szerzo_id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- KATEGÓRIÁK típusok -->
+    <xs:complexType name="KategoriakTipus">
+        <xs:sequence>
+            <xs:element name="kategoria" type="KategoriaTipus" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KategoriaTipus">
+        <xs:sequence>
+            <xs:element name="nev" type="xs:string"/>
+            <xs:element name="leiras" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="kategoria_id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- KÖNYVEK típusok -->
+    <xs:complexType name="KonyvekTipus">
+        <xs:sequence>
+            <xs:element name="konyv" type="KonyvTipus" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KonyvTipus">
+        <xs:sequence>
+            <xs:element name="cim" type="xs:string"/>
+            <xs:element name="ISBN" type="ISBNTipus"/>
+            <xs:element name="kiadasi_ev" type="xs:int"/>
+            <xs:element name="oldalszam" type="xs:int"/>
+        </xs:sequence>
+        <xs:attribute name="konyv_id" type="xs:string" use="required"/>
+        <xs:attribute name="kiado_id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- Saját típus: ISBN formátum (pl. 978-963-11-8765-4) -->
+    <xs:simpleType name="ISBNTipus">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{3}-\d{3}-\d{2}-\d{4}-\d"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- OLVASÓK típusok -->
+    <xs:complexType name="OlvasokTipus">
+        <xs:sequence>
+            <xs:element name="olvaso" type="OlvasoTipus" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OlvasoTipus">
+        <xs:sequence>
+            <xs:element name="nev" type="xs:string"/>
+            <xs:element name="email" type="EmailTipus"/>
+            <xs:element name="cim" type="CimTipus"/>
+        </xs:sequence>
+        <xs:attribute name="olvaso_id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- Saját típus: Email formátum -->
+    <xs:simpleType name="EmailTipus">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^@]+@[^@]+\.[^@]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Saját összetett típus: Cím -->
+    <xs:complexType name="CimTipus">
+        <xs:sequence>
+            <xs:element name="iranyitoszam" type="xs:string"/>
+            <xs:element name="varos" type="xs:string"/>
+            <xs:element name="utca" type="xs:string"/>
+            <xs:element name="hazszam" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- OLVASÓ TELEFONOK típusok -->
+    <xs:complexType name="OlvasoTelefonokTipus">
+        <xs:sequence>
+            <xs:element name="olvaso_telefon" type="OlvasoTelefonTipus" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OlvasoTelefonTipus">
+        <xs:sequence>
+            <xs:element name="telefonszam" type="TelefonTipus"/>
+        </xs:sequence>
+        <xs:attribute name="telefon_id" type="xs:string" use="required"/>
+        <xs:attribute name="olvaso_id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- Saját típus: Telefonszám formátum -->
+    <xs:simpleType name="TelefonTipus">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\+36 \d{2} \d{3} \d{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- KÖNYV-SZERZŐ kapcsolat típusok -->
+    <xs:complexType name="KonyvSzerzokTipus">
+        <xs:sequence>
+            <xs:element name="konyv_szerzo" type="KonyvSzerzoTipus" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KonyvSzerzoTipus">
+        <xs:sequence>
+            <xs:element name="szerep" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="konyv_id" type="xs:string" use="required"/>
+        <xs:attribute name="szerzo_id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- KÖNYV-KATEGÓRIA kapcsolat típusok -->
+    <xs:complexType name="KonyvKategoriakTipus">
+        <xs:sequence>
+            <xs:element name="konyv_kategoria" type="KonyvKategoriaTipus" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KonyvKategoriaTipus">
+        <xs:attribute name="konyv_id" type="xs:string" use="required"/>
+        <xs:attribute name="kategoria_id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- KÖLCSÖNZÉSEK típusok -->
+    <xs:complexType name="KolcsonzesekTipus">
+        <xs:sequence>
+            <xs:element name="kolcsonzes" type="KolcsonzesTipus" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KolcsonzesTipus">
+        <xs:sequence>
+            <xs:element name="kolcsonzes_datuma" type="xs:date"/>
+            <xs:element name="visszahozasi_hatarido" type="xs:date"/>
+            <xs:element name="statusz" type="StatuszTipus"/>
+        </xs:sequence>
+        <xs:attribute name="kolcsonzes_id" type="xs:string" use="required"/>
+        <xs:attribute name="olvaso_id" type="xs:string" use="required"/>
+        <xs:attribute name="konyv_id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- Saját típus: Státusz (enum-szerű korlátozás) -->
+    <xs:simpleType name="StatuszTipus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="folyamatban"/>
+            <xs:enumeration value="visszahozva"/>
+            <xs:enumeration value="késésben"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
