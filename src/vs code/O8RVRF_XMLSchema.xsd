@@ -16,6 +16,89 @@
                 <xs:element name="kolcsonzesek" type="KolcsonzesekTipus"/>
             </xs:sequence>
         </xs:complexType>
+
+        <!-- KEY definíciók (Primary Keys) -->
+        
+        <!-- Kiadó PK -->
+        <xs:key name="kiadoKey">
+            <xs:selector xpath="kiadok/kiado"/>
+            <xs:field xpath="@kiado_id"/>
+        </xs:key>
+
+        <!-- Szerző PK -->
+        <xs:key name="szerzoKey">
+            <xs:selector xpath="szerzok/szerzo"/>
+            <xs:field xpath="@szerzo_id"/>
+        </xs:key>
+
+        <!-- Kategória PK -->
+        <xs:key name="kategoriaKey">
+            <xs:selector xpath="kategoriak/kategoria"/>
+            <xs:field xpath="@kategoria_id"/>
+        </xs:key>
+
+        <!-- Könyv PK -->
+        <xs:key name="konyvKey">
+            <xs:selector xpath="konyvek/konyv"/>
+            <xs:field xpath="@konyv_id"/>
+        </xs:key>
+
+        <!-- Olvasó PK -->
+        <xs:key name="olvasoKey">
+            <xs:selector xpath="olvasok/olvaso"/>
+            <xs:field xpath="@olvaso_id"/>
+        </xs:key>
+
+        <!-- KEYREF definíciók (Foreign Keys) -->
+
+        <!-- Könyv -> Kiadó FK -->
+        <xs:keyref name="konyvKiadoRef" refer="kiadoKey">
+            <xs:selector xpath="konyvek/konyv"/>
+            <xs:field xpath="@kiado_id"/>
+        </xs:keyref>
+
+        <!-- Könyv_Szerző -> Könyv FK -->
+        <xs:keyref name="konyvSzerzoKonyvRef" refer="konyvKey">
+            <xs:selector xpath="konyv_szerzok/konyv_szerzo"/>
+            <xs:field xpath="@konyv_id"/>
+        </xs:keyref>
+
+        <!-- Könyv_Szerző -> Szerző FK -->
+        <xs:keyref name="konyvSzerzoSzerzoRef" refer="szerzoKey">
+            <xs:selector xpath="konyv_szerzok/konyv_szerzo"/>
+            <xs:field xpath="@szerzo_id"/>
+        </xs:keyref>
+
+        <!-- Könyv_Kategória -> Könyv FK -->
+        <xs:keyref name="konyvKategoriaKonyvRef" refer="konyvKey">
+            <xs:selector xpath="konyv_kategoriak/konyv_kategoria"/>
+            <xs:field xpath="@konyv_id"/>
+        </xs:keyref>
+
+        <!-- Könyv_Kategória -> Kategória FK -->
+        <xs:keyref name="konyvKategoriaKategoriaRef" refer="kategoriaKey">
+            <xs:selector xpath="konyv_kategoriak/konyv_kategoria"/>
+            <xs:field xpath="@kategoria_id"/>
+        </xs:keyref>
+
+        <!-- Olvasó_Telefon -> Olvasó FK -->
+        <xs:keyref name="olvasoTelefonRef" refer="olvasoKey">
+            <xs:selector xpath="olvaso_telefonok/olvaso_telefon"/>
+            <xs:field xpath="@olvaso_id"/>
+        </xs:keyref>
+
+        <!-- Kölcsönzés -> Olvasó FK -->
+        <xs:keyref name="kolcsonzesOlvasoRef" refer="olvasoKey">
+            <xs:selector xpath="kolcsonzesek/kolcsonzes"/>
+            <xs:field xpath="@olvaso_id"/>
+        </xs:keyref>
+
+        <!-- Kölcsönzés -> Könyv FK -->
+        <xs:keyref name="kolcsonzesKonyvRef" refer="konyvKey">
+            <xs:selector xpath="kolcsonzesek/kolcsonzes"/>
+            <xs:field xpath="@konyv_id"/>
+        </xs:keyref>
+
     </xs:element>
 
     <!-- KIADÓK típusok -->
